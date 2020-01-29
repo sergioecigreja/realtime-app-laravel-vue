@@ -18,11 +18,14 @@ class CreateRepliesTable extends Migration
 
             $table->text('body');
 
-            $table->integer('question_id')->unsigned();
+            $table->biginteger('question_id')->unsigned();
             $table->integer('user_id');
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
 
             $table->timestamps();
+        });
+
+        Schema::table('replies', function($table) {
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 
